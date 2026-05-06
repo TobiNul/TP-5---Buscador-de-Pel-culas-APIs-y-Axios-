@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { searchMovies, getMovieDetail } from "./services/api";
 import SearchBar from "./components/SearchBar";
-import MovieList from "./components/MovieList";
+import MovieList from "./movie-app/src/src/components/MovieList";
 import MovieDetail from "./components/MovieDetail";
 import Loader from "./components/Loader";
 import ErrorMessage from "./components/ErrorMessage";
@@ -67,3 +67,13 @@ function App() {
 export default App;
 
 <MovieList movies={movies} onSelect={handleSelect} />
+
+{loading && <Loader />}
+{error && <ErrorMessage message={error} />}
+{noResults && <p>No se encontraron resultados</p>}
+
+{!selected ? (
+  <MovieList movies={movies} onSelect={handleSelect} />
+) : (
+  <MovieDetail movie={selected} onBack={() => setSelected(null)} />
+)}
